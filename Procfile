@@ -1,0 +1,1 @@
+web: gunicorn HighSchool.wsgi --log-file -

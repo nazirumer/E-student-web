@@ -1,0 +1,115 @@
+
+{% extends 'student/mainstudent.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<style >
+	
+	table{
+		border-collapse: collapse;
+		width: 100%;
+	}
+	th{
+		background-color: #A52A2A;
+		color: white;
+		height: 50px;
+	}
+	tr:nth-child(even){
+		background-color: #FFE4C4;
+	}
+	
+	#navb ul li{
+		display: inline-flex;
+		padding-left: 22px;
+	
+	}
+
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<div class ='col-4'>
+	{%	for j,a in assesments.items %}
+		<table border="1">
+			<th>Code</th>
+			<th> Course Title</th>
+		
+			<th>ResultI</th>
+			<th>StatusI</th>
+			<th>Standingforsec</th>
+			<th>Standingfromall</th>
+			{%	for j in a %}
+				{% if  j.total %}
+			<h2> grade {{Grade}} {{j.grade}} {{j.semister.semister}}</h2>
+			{% endif %}
+		{% if not j.total %}
+
+			<tr>
+				<td>{{j.course.course_id}}</td>
+				<td>{{j.course.course_name}}</td>
+				<td>{{j.result}}</td>
+				<td style="background-color:{{j.status}};"></td>
+			
+				<td>{{j.standing_sec}}</td>
+				<td>{{j.standing_all}}</td>
+			</tr>
+			{% endif %}
+			{% if j.total %}
+			<tr>
+    <th colspan="2">Semister Total</th>
+    <td>{{j.total}}</td>
+    <td>{{j.avg|floatformat:"2"}}</td>
+    <td>{{j.standing_sec}}</td>
+    <td>{{j.standing_all}}</td>
+    
+  </tr>
+  <tr>
+    <th colspan="2">grade {{j.grade}} Total</th>
+    <td>{{j.wholetotal}}</td>
+    <td>{{j.wholeavg|floatformat:"2"}}</td>
+    <td>{{j.wholestanding_sec}}</td>
+    <td>{{j.wholestanding_all}}</td>
+    
+  </tr>
+  
+  
+  <tr>
+  	{% if j.complete %}
+	<th colspan="3">Acadamic Status : Promoted</th>
+{% else %}
+	<th colspan="3">Acadamic Status : Failed</th>
+{% endif %}
+    
+    
+  </tr>
+				{% endif %}
+			{% endfor %}
+	 	
+  
+  
+		</table>
+		
+	{%endfor%}
+	</div>
+	<div class ='col-5'>
+	
+	</div>	
+	
+	</div>
+</div>
+</body>
+
+</html>
+
+
+{% endblock %}
+
+
